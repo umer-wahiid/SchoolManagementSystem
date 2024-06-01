@@ -1,6 +1,7 @@
 ﻿using SchoolManagementSystem.Domain.Entitites;
 using SchoolManagementSystem.Domain.Repositories;
 using SchoolManagementSystem.Domain.UnitOfWork;
+using SchoolManagementSystem.DTOs;
 
 namespace SchoolManagementSystem.Services
 {
@@ -20,11 +21,18 @@ namespace SchoolManagementSystem.Services
         public async Task<User> Get(int id)
               => await _userRepository.GetByIdAsync(id);
 
-        public async Task<IEnumerable<User>> Add(User user)
+        public async Task<IEnumerable<User>> Add(UserDTO userDto)
         {
             try
             {
+                User user = new();
+                user.RoleID = userDto.RoleID;
+                user.Username = userDto.Username;
+                user.Password = userDto.Password;
+                user.Email = userDto.Email;
+
                 await _userRepository.InsertAsync(user);            
+                await _userRepository.SaveAsync();            
                 return await _userRepository.GetAllAsync();
             }
             catch (Exception){

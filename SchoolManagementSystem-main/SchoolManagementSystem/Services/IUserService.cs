@@ -1,4 +1,5 @@
 ﻿using SchoolManagementSystem.Domain.Entitites;
+using SchoolManagementSystem.DTOs;
 
 namespace SchoolManagementSystem.Services
 {
@@ -6,6 +7,6 @@ namespace SchoolManagementSystem.Services
     {
         Task<IEnumerable<User>> GetAll();
         Task<User> Get(int id);
-        Task<IEnumerable<User>> Add(User user);
+        Task<IEnumerable<User>> Add(UserDTO user);
     }
 }

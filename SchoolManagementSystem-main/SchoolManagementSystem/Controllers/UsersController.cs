@@ -2,6 +2,7 @@
 using NuGet.Protocol;
 using SchoolManagementSystem.Domain.Entitites;
 using SchoolManagementSystem.Services;
+using SchoolManagementSystem.DTOs;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -36,10 +37,24 @@ namespace SchoolManagementSystem.Controllers
 
         // POST api/<UsersController>
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] User user)
+        public async Task<IActionResult> Post([FromBody] UserDTO user)
         {
-            var response = await _userService.Add(user);
-            return Ok(response);
+            try
+            {
+                if (!ModelState.IsValid)
+                    return BadRequest(ModelState);
+                var response = await _userService.Add(user);
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                var errorDetails = new
+                {
+                    message = ex.Message,
+                    innerException = ex.InnerException?.Message
+                };
+                return BadRequest(errorDetails);
+            }
         }
 
         // PUT api/<UsersController>/5
