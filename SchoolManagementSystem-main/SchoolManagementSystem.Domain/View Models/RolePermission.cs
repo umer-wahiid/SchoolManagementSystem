@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SchoolManagementSystem.Domain.Entitites
@@ -10,8 +9,6 @@ namespace SchoolManagementSystem.Domain.Entitites
         public List<ModuleViewModel> ModuleViewModels { get; set; }
         public int RoleId { get; set; }
         public string RoleName { get; set; }
-        [NotMapped]
-        public SelectList RoleList { get; set; }
     }
 
     public class ModuleViewModel
@@ -22,6 +19,7 @@ namespace SchoolManagementSystem.Domain.Entitites
         public bool IsModuleAllow { get; set; }
         public List<PageViewModel> PageViewModel { get; set; }
     }
+
     public class ActionViewModel
     {
         [Key]

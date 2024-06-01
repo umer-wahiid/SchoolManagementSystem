@@ -15,5 +15,4 @@ namespace SchoolManagementSystem.Domain.Entitites
         public int RoleID { get; set; }
         public Role Role { get; set; }
     }
-
 }

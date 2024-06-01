@@ -20,9 +20,7 @@ builder.Services.AddSwaggerGen();
 //Configure interfaces and services
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IStudentService, StudentService>();
-
-
-
+builder.Services.AddScoped<IUserService, UserService>();
 
 var app = builder.Build();
 
