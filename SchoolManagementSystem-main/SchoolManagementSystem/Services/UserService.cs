@@ -32,11 +32,12 @@ namespace SchoolManagementSystem.Services
                 user.Password = userDto.Password;
                 user.Email = userDto.Email;
 
-                await _userRepository.InsertAsync(user);            
-                await _userRepository.SaveAsync();            
+                await _userRepository.InsertAsync(user);
+                await _userRepository.SaveAsync();
                 return await _userRepository.GetAllAsync();
             }
-            catch (Exception){
+            catch (Exception)
+            {
                 throw;
             }
         }
@@ -74,11 +75,12 @@ namespace SchoolManagementSystem.Services
                 if (user == null)
                     throw new KeyNotFoundException($"User with ID {id} was not found.");
 
-                _userRepository.Delete(user);            
-                await _userRepository.SaveAsync();            
+                _userRepository.Delete(user);
+                await _userRepository.SaveAsync();
                 return await _userRepository.GetAllAsync();
             }
-            catch (Exception){
+            catch (Exception)
+            {
                 throw;
             }
         }

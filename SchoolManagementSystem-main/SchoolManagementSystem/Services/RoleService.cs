@@ -5,10 +5,11 @@ using SchoolManagementSystem.DTOs;
 
 namespace SchoolManagementSystem.Services
 {
-    public class RoleService:IRoleService
+    public class RoleService : IRoleService
     {
         private IUnitOfWork _unitOfWork { get; set; }
         private IGenericRepository<Role> _roleRepository { get; set; }
+        
         public RoleService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;

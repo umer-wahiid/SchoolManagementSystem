@@ -1,18 +1,18 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SchoolManagementSystem.DTOs;
-using SchoolManagementSystem.Services;
+using SchoolManagementSystem.Interfaces;
 
 namespace SchoolManagementSystem.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class PermissionsController : ControllerBase
     {
-        private readonly IUserService _userService;
+        private readonly IPermissionService _permissionService;
 
-        public UsersController(IUserService userService)
+        public PermissionsController(IPermissionService permissionService)
         {
-            _userService = userService;
+            _permissionService = permissionService;
         }
 
         [HttpGet]
@@ -22,7 +22,7 @@ namespace SchoolManagementSystem.Controllers
         {
             try
             {
-                var response = await _userService.GetAll();
+                var response = await _permissionService.GetAll();
                 return Ok(response);
             }
             catch (Exception ex)
@@ -41,8 +41,8 @@ namespace SchoolManagementSystem.Controllers
         {
             try
             {
-                var response = await _userService.Get(id);
-                return response == null ? NotFound(new { message = $"User with ID {id} was not found." }) : Ok(response);
+                var response = await _permissionService.Get(id);
+                return response == null ? NotFound(new { message = $"Permission with ID {id} was not found." }) : Ok(response);
             }
             catch (Exception ex)
             {
@@ -56,13 +56,13 @@ namespace SchoolManagementSystem.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] UserDTO user)
+        public async Task<IActionResult> Post([FromBody] PermissionDTO role)
         {
             try
             {
                 if (!ModelState.IsValid)
                     return BadRequest(ModelState);
-                var response = await _userService.Add(user);
+                var response = await _permissionService.Add(role);
                 return Ok(response);
             }
             catch (Exception ex)
@@ -77,16 +77,16 @@ namespace SchoolManagementSystem.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> Put([FromBody] UserDTO user)
+        public async Task<IActionResult> Put([FromBody] PermissionDTO role)
         {
             try
             {
                 if (!ModelState.IsValid)
                     return BadRequest(ModelState);
-                var userById = await _userService.Get(user.RoleID);
-                if (userById is null)
-                    return NotFound(new { message = $"User with ID {user.UserID} was not found." });
-                var response = await _userService.Edit(user);
+                var roleById = await _permissionService.Get(role.PermissionID);
+                if (roleById is null)
+                    return NotFound(new { message = $"Permission with ID {role.PermissionID} was not found." });
+                var response = await _permissionService.Edit(role);
                 return Ok(response);
             }
             catch (Exception ex)
@@ -107,7 +107,7 @@ namespace SchoolManagementSystem.Controllers
             {
                 if (!ModelState.IsValid)
                     return BadRequest(ModelState);
-                var response = await _userService.Delete(id);
+                var response = await _permissionService.Delete(id);
                 return Ok(response);
             }
             catch (Exception ex)

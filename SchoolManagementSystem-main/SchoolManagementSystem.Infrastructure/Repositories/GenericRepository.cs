@@ -34,7 +34,7 @@ namespace SchoolManagementSystem.Infrastructure
             {
                 baseEntity.IsDeleted = true;
                 baseEntity.ModifiedAt = DateTime.UtcNow;
-                baseEntity.ModifiedBy = ""; 
+                baseEntity.ModifiedBy = "";
                 DbSet.Attach(obj);
                 _context.Entry(obj).State = EntityState.Modified;
             }

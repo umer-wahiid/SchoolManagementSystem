@@ -8,7 +8,7 @@ namespace SchoolManagementSystem.Domain.Enums
 {
     public enum ResultType
     {
-        FinalTerm=1,
-        MidTerm=2
+        FinalTerm = 1,
+        MidTerm = 2
     }
 }

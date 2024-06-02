@@ -2,8 +2,8 @@
 {
     public enum AttendanceStatus
     {
-        Absent=1,
-        Present=2,
-        Leave=3
+        Absent = 1,
+        Present = 2,
+        Leave = 3
     }
 }

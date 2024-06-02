@@ -14,21 +14,17 @@ namespace SchoolManagementSystem.Infrastructure.DBContext
         public DbSet<Class> Classes { get; set; }
         public DbSet<Enrollment> Enrollments { get; set; }
         public DbSet<Result> Results { get; set; }
-        public DbSet<Role> Roles{ get; set; }
+        public DbSet<Role> Roles { get; set; }
         public DbSet<Subject> Subjects { get; set; }
-        public DbSet<SubjectResult> SubjectResults  { get; set; }
-        public DbSet<Teacher> Teachers  { get; set; }
+        public DbSet<SubjectResult> SubjectResults { get; set; }
+        public DbSet<Teacher> Teachers { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<Permission> Permissions { get; set; }
-
-
+        public DbSet<Module> Modules { get; set; }
+        public DbSet<Page> Pages { get; set; }
+        public DbSet<Permission> Permission { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            //builder.Entity<Student>().HasQueryFilter(s => !s.IsDeleted);
-          
-
-            
             base.OnModelCreating(builder);
 
             foreach (var entityType in builder.Model.GetEntityTypes())

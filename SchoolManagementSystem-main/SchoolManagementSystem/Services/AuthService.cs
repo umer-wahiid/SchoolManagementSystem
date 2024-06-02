@@ -29,9 +29,9 @@ namespace SchoolManagementSystem.Services
                 throw new ArgumentNullException(nameof(auth));
             try
             {
-                var user = _authRepository.FirstOrDefault( x => x.Password.Equals(auth.Password) && (x.Username.Equals(auth.UserName)
+                var user = _authRepository.FirstOrDefault(x => x.Password.Equals(auth.Password) && (x.Username.Equals(auth.UserName)
                           || x.Email.Equals(auth.Email)));
-                
+
                 if (user is null)
                     return null;
 

@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SchoolManagementSystem.Domain.Entitites;
 using SchoolManagementSystem.DTOs;
 using SchoolManagementSystem.Interfaces;
 

@@ -6,9 +6,7 @@ namespace SchoolManagementSystem.Domain.Repositories
     {
         Task<int> SaveAsync();
         Task<T> GetByIdAsync(int id);
-
         Task InsertAsync(T obj);
-
         IEnumerable<dynamic> GetAllListDyn();
         IEnumerable<T> GetAll();
         Task<IEnumerable<T>> GetAllAsync();
@@ -26,7 +24,5 @@ namespace SchoolManagementSystem.Domain.Repositories
         T FirstOrDefault(Expression<Func<T, bool>> predicate);
         T First(Expression<Func<T, bool>> predicate);
         bool Any(Expression<Func<T, bool>> predicate);
-
-
     }
 }
