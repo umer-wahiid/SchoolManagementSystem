@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SchoolManagementSystem.Domain.Entitites;
-using SchoolManagementSystem.DTOs;
 using SchoolManagementSystem.Services;
+using SchoolManagementSystem.DTOs;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -9,13 +8,13 @@ namespace SchoolManagementSystem.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class RolesController : ControllerBase
     {
-        private readonly IUserService _userService;
+        private readonly IRoleService _roleService;
 
-        public UsersController(IUserService userService)
+        public RolesController(IRoleService roleService)
         {
-            _userService = userService;
+            _roleService = roleService;
         }
 
         [HttpGet]
@@ -25,7 +24,7 @@ namespace SchoolManagementSystem.Controllers
         {
             try
             {
-                var response = await _userService.GetAll();
+                var response = await _roleService.GetAll();
                 return Ok(response);
             }
             catch (Exception ex)
@@ -44,7 +43,7 @@ namespace SchoolManagementSystem.Controllers
         {
             try
             {
-                var response = await _userService.Get(id);
+                var response = await _roleService.Get(id);
                 return Ok(response);
             }
             catch (Exception ex)
@@ -59,13 +58,13 @@ namespace SchoolManagementSystem.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] UserDTO user)
+        public async Task<IActionResult> Post([FromBody] RoleDTO role)
         {
             try
             {
                 if (!ModelState.IsValid)
                     return BadRequest(ModelState);
-                var response = await _userService.Add(user);
+                var response = await _roleService.Add(role);
                 return Ok(response);
             }
             catch (Exception ex)
@@ -80,13 +79,13 @@ namespace SchoolManagementSystem.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> Put([FromBody] UserDTO user)
+        public async Task<IActionResult> Put([FromBody] RoleDTO role)
         {
             try
             {
                 if (!ModelState.IsValid)
                     return BadRequest(ModelState);
-                var response = await _userService.Edit(user);
+                var response = await _roleService.Edit(role);
                 return Ok(response);
             }
             catch (Exception ex)
@@ -107,7 +106,7 @@ namespace SchoolManagementSystem.Controllers
             {
                 if (!ModelState.IsValid)
                     return BadRequest(ModelState);
-                var response = await _userService.Delete(id);
+                var response = await _roleService.Delete(id);
                 return Ok(response);
             }
             catch (Exception ex)

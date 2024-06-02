@@ -2,7 +2,7 @@
 
 namespace SchoolManagementSystem.DTOs
 {
-    public class UserDTO
+    public record UserDTO
     {
         public int UserID { get; set; }
 

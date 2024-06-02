@@ -83,6 +83,7 @@ namespace SchoolManagementSystem.Infrastructure
         {
             return DbSet.AsNoTracking().ToList();
         }
+
         public async Task<IEnumerable<T>> GetAllAsync()
         {
             return await DbSet.AsNoTracking().ToListAsync();
@@ -92,6 +93,7 @@ namespace SchoolManagementSystem.Infrastructure
         {
             return await DbSet.ToListAsync<dynamic>();
         }
+
         public IEnumerable<dynamic> GetAllListDyn()
         {
             return DbSet.ToList<dynamic>();

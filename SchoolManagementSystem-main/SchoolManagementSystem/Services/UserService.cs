@@ -39,5 +39,39 @@ namespace SchoolManagementSystem.Services
                 throw;
             }
         }
+
+        public async Task<IEnumerable<User>> Edit(UserDTO userDto)
+        {
+            try
+            {
+                User user = new();
+                user.UserID = userDto.UserID;
+                user.RoleID = userDto.RoleID;
+                user.Username = userDto.Username;
+                user.Password = userDto.Password;
+                user.Email = userDto.Email;
+
+                _userRepository.Update(user);            
+                await _userRepository.SaveAsync();            
+                return await _userRepository.GetAllAsync();
+            }
+            catch (Exception){
+                throw;
+            }
+        }
+
+        public async Task<IEnumerable<User>> Delete(int id)
+        {
+            try
+            {
+                User user = await this.Get(id);
+                _userRepository.Delete(user);            
+                await _userRepository.SaveAsync();            
+                return await _userRepository.GetAllAsync();
+            }
+            catch (Exception){
+                throw;
+            }
+        }
     }
 }
