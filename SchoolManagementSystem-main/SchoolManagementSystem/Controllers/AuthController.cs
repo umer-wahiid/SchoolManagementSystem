@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SchoolManagementSystem.Domain.Entitites;
 using SchoolManagementSystem.DTOs;
 using SchoolManagementSystem.Interfaces;
 
@@ -18,8 +19,16 @@ namespace SchoolManagementSystem.Controllers
         {
             try
             {
-                var user = _authService.Authenticate(oAuth);
-                return user == null ? Unauthorized(new { message = "Invalid Credentials" }) : Ok(user);
+                var token = _authService.Authenticate(oAuth);
+                if (token == null)
+                    return Unauthorized(new { message = "Invalid Credentials" });
+
+                return Ok(new
+                {
+                    AccessToken = token,
+                    AccessType = "Bearer",
+                });
+
             }
             catch (Exception ex)
             {

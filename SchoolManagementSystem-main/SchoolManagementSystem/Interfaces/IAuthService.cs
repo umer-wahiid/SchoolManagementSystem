@@ -1,10 +1,12 @@
 ﻿using SchoolManagementSystem.Domain.Entitites;
 using SchoolManagementSystem.DTOs;
+using System.Security.Claims;
 
 namespace SchoolManagementSystem.Interfaces
 {
     public interface IAuthService
     {
-        User Authenticate(OAuth auth);
+        string Authenticate(OAuth auth);
+        IEnumerable<Claim> ValidateToken(string token);
     }
 }
