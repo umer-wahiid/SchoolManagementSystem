@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SchoolManagementSystem.Domain.Entitites;
 using SchoolManagementSystem.DTOs;
 using SchoolManagementSystem.Services;
+using System.Data;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -45,7 +47,7 @@ namespace SchoolManagementSystem.Controllers
             try
             {
                 var response = await _userService.Get(id);
-                return Ok(response);
+                return response == null ? NotFound(new { message = $"User with ID {id} was not found." }) : Ok(response);
             }
             catch (Exception ex)
             {
@@ -86,6 +88,9 @@ namespace SchoolManagementSystem.Controllers
             {
                 if (!ModelState.IsValid)
                     return BadRequest(ModelState);
+                var userById = await _userService.Get(user.RoleID);
+                if (userById is null)
+                    return NotFound(new { message = $"User with ID {user.UserID} was not found." });
                 var response = await _userService.Edit(user);
                 return Ok(response);
             }

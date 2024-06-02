@@ -2,6 +2,7 @@
 using SchoolManagementSystem.Domain.Repositories;
 using SchoolManagementSystem.Domain.UnitOfWork;
 using SchoolManagementSystem.DTOs;
+using System.Data;
 
 namespace SchoolManagementSystem.Services
 {
@@ -44,18 +45,23 @@ namespace SchoolManagementSystem.Services
         {
             try
             {
-                User user = new();
-                user.UserID = userDto.UserID;
-                user.RoleID = userDto.RoleID;
-                user.Username = userDto.Username;
-                user.Password = userDto.Password;
-                user.Email = userDto.Email;
+                var existingUser = await _userRepository.GetByIdAsync(userDto.RoleID);
+                if (existingUser == null)
+                    throw new KeyNotFoundException($"User with ID {userDto.UserID} was not found.");
 
-                _userRepository.Update(user);            
-                await _userRepository.SaveAsync();            
+                existingUser.UserID = userDto.UserID;
+                existingUser.RoleID = userDto.RoleID;
+                existingUser.Username = userDto.Username;
+                existingUser.Password = userDto.Password;
+                existingUser.Email = userDto.Email;
+
+                _userRepository.Update(existingUser);
+                await _userRepository.SaveAsync();
+
                 return await _userRepository.GetAllAsync();
             }
-            catch (Exception){
+            catch (Exception)
+            {
                 throw;
             }
         }
@@ -65,6 +71,9 @@ namespace SchoolManagementSystem.Services
             try
             {
                 User user = await this.Get(id);
+                if (user == null)
+                    throw new KeyNotFoundException($"User with ID {id} was not found.");
+
                 _userRepository.Delete(user);            
                 await _userRepository.SaveAsync();            
                 return await _userRepository.GetAllAsync();

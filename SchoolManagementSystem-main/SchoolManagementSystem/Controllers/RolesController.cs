@@ -44,7 +44,7 @@ namespace SchoolManagementSystem.Controllers
             try
             {
                 var response = await _roleService.Get(id);
-                return Ok(response);
+                return response == null ? NotFound(new { message = $"Role with ID {id} was not found." }) : Ok(response);
             }
             catch (Exception ex)
             {
@@ -85,6 +85,9 @@ namespace SchoolManagementSystem.Controllers
             {
                 if (!ModelState.IsValid)
                     return BadRequest(ModelState);
+                var roleById = await _roleService.Get(role.RoleID);
+                if(roleById is null)
+                    return NotFound(new { message = $"Role with ID {role.RoleID} was not found." });
                 var response = await _roleService.Edit(role);
                 return Ok(response);
             }

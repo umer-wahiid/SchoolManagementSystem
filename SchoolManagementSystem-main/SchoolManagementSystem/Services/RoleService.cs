@@ -16,10 +16,10 @@ namespace SchoolManagementSystem.Services
         }
 
         public async Task<IEnumerable<Role>> GetAll()
-         => await _roleRepository.GetAllAsync();
+            => await _roleRepository.GetAllAsync();
 
         public async Task<Role> Get(int id)
-              => await _roleRepository.GetByIdAsync(id);
+            => await _roleRepository.GetByIdAsync(id);
 
         public async Task<IEnumerable<Role>> Add(RoleDTO roleDto)
         {
@@ -44,13 +44,16 @@ namespace SchoolManagementSystem.Services
         {
             try
             {
-                Role role = new();
-                role.RoleID = roleDto.RoleID;
-                role.RoleName = roleDto.RoleName;
-                role.Description = roleDto.Description;
+                var existingRole = await _roleRepository.GetByIdAsync(roleDto.RoleID);
+                if (existingRole == null)
+                    throw new KeyNotFoundException($"Role with ID {roleDto.RoleID} was not found.");
 
-                _roleRepository.Update(role);
+                existingRole.RoleName = roleDto.RoleName;
+                existingRole.Description = roleDto.Description;
+
+                _roleRepository.Update(existingRole);
                 await _roleRepository.SaveAsync();
+
                 return await _roleRepository.GetAllAsync();
             }
             catch (Exception)
@@ -64,6 +67,9 @@ namespace SchoolManagementSystem.Services
             try
             {
                 Role role = await this.Get(id);
+                if (role == null)
+                    throw new KeyNotFoundException($"Role with ID {id} was not found.");
+
                 _roleRepository.Delete(role);
                 await _roleRepository.SaveAsync();
                 return await _roleRepository.GetAllAsync();
