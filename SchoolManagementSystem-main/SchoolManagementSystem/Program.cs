@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using SchoolManagementSystem.Domain.UnitOfWork;
 using SchoolManagementSystem.Infrastructure.DBContext;
+using SchoolManagementSystem.Interfaces;
 using SchoolManagementSystem.Services;
 using SchoolManagementSystem.UnitOfWork;
 
@@ -22,6 +23,7 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IStudentService, StudentService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IRoleService, RoleService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 var app = builder.Build();
 
