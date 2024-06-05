@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore.Storage;
+using SchoolManagementSystem.Domain.Entitites;
 using SchoolManagementSystem.Domain.Repositories;
 using SchoolManagementSystem.Domain.UnitOfWork;
 using SchoolManagementSystem.Infrastructure;

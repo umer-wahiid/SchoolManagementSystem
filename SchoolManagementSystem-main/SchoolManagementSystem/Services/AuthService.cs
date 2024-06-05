@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
-using NuGet.Protocol;
-using SchoolManagementSystem.Domain.Entitites;
+﻿using SchoolManagementSystem.Domain.Entitites;
 using SchoolManagementSystem.Domain.Repositories;
 using SchoolManagementSystem.Domain.UnitOfWork;
 using SchoolManagementSystem.DTOs;
@@ -29,8 +27,10 @@ namespace SchoolManagementSystem.Services
                 throw new ArgumentNullException(nameof(auth));
             try
             {
-                var user = _authRepository.FirstOrDefault(x => x.Password.Equals(auth.Password) && (x.Username.Equals(auth.UserName)
-                          || x.Email.Equals(auth.Email)));
+                var user = _authRepository
+                    .FirstOrDefault
+                    (x => x.Password.Equals(auth.Password) 
+                    && (x.Username.Equals(auth.UserName)));
 
                 if (user is null)
                     return null;

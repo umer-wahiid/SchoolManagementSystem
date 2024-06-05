@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SchoolManagementSystem.DTOs;
+using SchoolManagementSystem.Infrastructure.Authorize;
 using SchoolManagementSystem.Services;
 
 namespace SchoolManagementSystem.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [CustomAuthorize]
     public class UsersController : ControllerBase
     {
         private readonly IUserService _userService;
