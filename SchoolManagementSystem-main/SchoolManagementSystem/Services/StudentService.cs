@@ -1,6 +1,7 @@
 using SchoolManagementSystem.Domain.Entitites;
 using SchoolManagementSystem.Domain.Repositories;
 using SchoolManagementSystem.Domain.UnitOfWork;
+using SchoolManagementSystem.Domain.Enums;
 using SchoolManagementSystem.DTOs;
 
 namespace SchoolManagementSystem.Services
@@ -17,10 +18,28 @@ namespace SchoolManagementSystem.Services
         }
 
         public async Task<IEnumerable<Student>> GetAll()
-            => await _studentRepository.GetAllAsync();
+        {
+            try
+            {
+                return await _studentRepository.GetAllAsync();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         public async Task<Student> Get(int id)
-            => await _studentRepository.GetByIdAsync(id);
+        {
+            try
+            {
+                return await _studentRepository.GetByIdAsync(id);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         public async Task<IEnumerable<Student>> Add(StudentDTO studentDto)
         {

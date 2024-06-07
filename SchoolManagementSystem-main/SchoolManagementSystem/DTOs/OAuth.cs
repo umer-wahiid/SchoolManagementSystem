@@ -1,11 +1,11 @@
 ﻿namespace SchoolManagementSystem.DTOs
 {
     public record OAuth
-    {
-        public string UserName { get; set; }
+    (
+        string UserName,
 
-        public string Email { get; set; }
+        string Email,
 
-        public string Password { get; set; }
-    }
+        string Password
+    );
 }

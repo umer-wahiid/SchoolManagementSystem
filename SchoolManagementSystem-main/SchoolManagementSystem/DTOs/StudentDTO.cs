@@ -1,39 +1,39 @@
-﻿using SchoolManagementSystem.Domain.Entitites;
+﻿using SchoolManagementSystem.Domain.Enums;
 using System.ComponentModel.DataAnnotations;
 
 namespace SchoolManagementSystem.DTOs
 {
     public record StudentDTO
-    {
-        public int StudentID { get; set; }
+    (
+        int StudentID,
 
         [Required(ErrorMessage = "First name is required.")]
         [StringLength(50, ErrorMessage = "First name must be between 1 and 50 characters.", MinimumLength = 1)]
-        public string FirstName { get; set; }
+        string FirstName,
 
         [Required(ErrorMessage = "Last name is required.")]
         [StringLength(50, ErrorMessage = "Last name must be between 1 and 50 characters.", MinimumLength = 1)]
-        public string LastName { get; set; }
+        string LastName,
 
         [Required(ErrorMessage = "Date of birth is required.")]
         [DataType(DataType.Date)]
-        public DateTime DateOfBirth { get; set; }
+        DateTime DateOfBirth,
 
         [Required(ErrorMessage = "Gender is required.")]
-        public string Gender { get; set; }
+        Gender Gender,
 
         [Required(ErrorMessage = "Address is required.")]
         [StringLength(100, ErrorMessage = "Address must be between 1 and 100 characters.", MinimumLength = 1)]
-        public string Address { get; set; }
+        string Address,
 
         [Required(ErrorMessage = "Phone number is required.")]
         [Phone(ErrorMessage = "Invalid phone number format.")]
-        public string PhoneNumber { get; set; }
+        string PhoneNumber,
 
         [Required(ErrorMessage = "Enrollment date is required.")]
         [DataType(DataType.Date)]
-        public DateTime AdmissionDate { get; set; }
+        DateTime AdmissionDate,
 
-        public int UserID { get; set; }
-    }
+        int UserID
+    );
 }

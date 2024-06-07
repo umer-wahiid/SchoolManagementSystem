@@ -17,10 +17,28 @@ namespace SchoolManagementSystem.Services
         }
 
         public async Task<IEnumerable<User>> GetAll()
-              => await _userRepository.GetAllAsync();
+        {
+            try
+            {
+                return await _userRepository.GetAllAsync();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         public async Task<User> Get(int id)
-              => await _userRepository.GetByIdAsync(id);
+        {
+            try
+            {
+                return await _userRepository.GetByIdAsync(id);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         public async Task<IEnumerable<User>> Add(UserDTO userDto)
         {

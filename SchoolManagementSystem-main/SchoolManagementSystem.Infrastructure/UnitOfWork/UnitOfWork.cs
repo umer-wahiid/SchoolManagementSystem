@@ -14,7 +14,6 @@ namespace SchoolManagementSystem.UnitOfWork
         private ApplicationContext _context;
         private IDbContextTransaction _transaction;
 
-
         public UnitOfWork(ApplicationContext context)
         {
             _context = context;
@@ -34,27 +33,30 @@ namespace SchoolManagementSystem.UnitOfWork
             }
             return (GenericRepository<T>)repositories[type];
         }
+
         public int Save()
         {
             return _context.SaveChanges();
         }
-
 
         public IDbContextTransaction Begin()
         {
             _transaction = _context.Database.BeginTransaction();
             return _transaction;
         }
+        
         public void Commit()
         {
             _transaction.Commit();
             Dispose();
         }
+        
         public void Rollback()
         {
             _transaction.Rollback();
             Dispose();
         }
+        
         public void Dispose()
         {
             Dispose(true);
@@ -62,6 +64,7 @@ namespace SchoolManagementSystem.UnitOfWork
                 _transaction.Dispose();
             _transaction = null;
         }
+        
         protected virtual void Dispose(bool Disposing)
         {
             if (!this.disposed)

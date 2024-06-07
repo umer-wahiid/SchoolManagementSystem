@@ -17,10 +17,28 @@ namespace SchoolManagementSystem.Services
         }
 
         public async Task<IEnumerable<Role>> GetAll()
-            => await _roleRepository.GetAllAsync();
+        {
+            try
+            {
+                return await _roleRepository.GetAllAsync();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         public async Task<Role> Get(int id)
-            => await _roleRepository.GetByIdAsync(id);
+        {
+            try
+            {
+                return await _roleRepository.GetByIdAsync(id);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         public async Task<IEnumerable<Role>> Add(RoleDTO roleDto)
         {

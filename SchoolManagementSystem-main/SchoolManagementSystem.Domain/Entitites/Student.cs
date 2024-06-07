@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using SchoolManagementSystem.Domain.Enums;
 
 namespace SchoolManagementSystem.Domain.Entitites
 {
@@ -20,7 +21,7 @@ namespace SchoolManagementSystem.Domain.Entitites
         public DateTime DateOfBirth { get; set; }
 
         [Required(ErrorMessage = "Gender is required.")]
-        public string Gender { get; set; }
+        public Gender Gender { get; set; }
 
         [Required(ErrorMessage = "Address is required.")]
         [StringLength(100, ErrorMessage = "Address must be between 1 and 100 characters.", MinimumLength = 1)]
@@ -36,10 +37,10 @@ namespace SchoolManagementSystem.Domain.Entitites
 
         public int UserID { get; set; }
 
-        public User User { get; set; } 
+        public User User { get; set; }
 
-        public List<Enrollment> Enrollments { get; set; } 
+        public List<Enrollment> Enrollments { get; set; }
 
-        public List<Attendance> Attendances { get; set; } 
+        public List<Attendance> Attendances { get; set; }
     }
 }

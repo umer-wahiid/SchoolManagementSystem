@@ -18,10 +18,28 @@ namespace SchoolManagementSystem.Services
         }
 
         public async Task<IEnumerable<Permission>> GetAll()
-            => await _permissionRepository.GetAllAsync();
+        {
+            try
+            {
+                return await _permissionRepository.GetAllAsync();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         public async Task<Permission> Get(int id)
-            => await _permissionRepository.GetByIdAsync(id);
+        {
+            try
+            {
+                return await _permissionRepository.GetByIdAsync(id);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         public async Task<IEnumerable<Permission>> Add(PermissionDTO permissionDto)
         {

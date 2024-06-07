@@ -3,19 +3,19 @@
 namespace SchoolManagementSystem.DTOs
 {
     public record PermissionDTO
-    {
-        public int PermissionID { get; set; }
+    (
+        int PermissionID,
 
-        public int RoleID { get; set; }
+        int RoleID,
 
-        public int PageID { get; set; }
+        int PageID,
 
-        public bool View { get; set; }
+        bool View,
 
-        public bool Update { get; set; }
+        bool Update,
 
-        public bool Create { get; set; }
+        bool Create,
 
-        public bool Delete { get; set; }
-    }
+        bool Delete
+    );
 }

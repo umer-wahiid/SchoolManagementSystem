@@ -1,11 +1,11 @@
 ﻿namespace SchoolManagementSystem.DTOs
 {
     public record RoleDTO
-    {
-        public int RoleID { get; set; }
+    (
+        int RoleID,
 
-        public string RoleName { get; set; }
+        string RoleName,
 
-        public string Description { get; set; }
-    }
+        string Description
+    );
 }

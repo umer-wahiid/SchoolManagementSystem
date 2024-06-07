@@ -7,7 +7,7 @@ namespace SchoolManagementSystem.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [CustomAuthorize]
+    //[CustomAuthorize]
     public class UsersController : ControllerBase
     {
         private readonly IUserService _userService;
