@@ -50,7 +50,7 @@ namespace SchoolManagementSystem.Services
                 role.Description = roleDto.Description;
 
                 await _roleRepository.InsertAsync(role);
-                await _roleRepository.SaveAsync();
+                await _unitOfWork.SaveAsync();
                 return await _roleRepository.GetAllAsync();
             }
             catch (Exception)
@@ -71,7 +71,7 @@ namespace SchoolManagementSystem.Services
                 existingRole.Description = roleDto.Description;
 
                 _roleRepository.Update(existingRole);
-                await _roleRepository.SaveAsync();
+                await _unitOfWork.SaveAsync();
 
                 return await _roleRepository.GetAllAsync();
             }
@@ -90,7 +90,7 @@ namespace SchoolManagementSystem.Services
                     throw new KeyNotFoundException($"Role with ID {id} was not found.");
 
                 _roleRepository.Delete(role);
-                await _roleRepository.SaveAsync();
+                await _unitOfWork.SaveAsync();
                 return await _roleRepository.GetAllAsync();
             }
             catch (Exception)

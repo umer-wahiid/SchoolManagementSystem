@@ -57,7 +57,7 @@ namespace SchoolManagementSystem.Services
                 student.UserID = studentDto.UserID;
 
                 await _studentRepository.InsertAsync(student);
-                await _studentRepository.SaveAsync();
+                await _unitOfWork.SaveAsync();
                 return await _studentRepository.GetAllAsync();
             }
             catch (Exception)
@@ -84,7 +84,7 @@ namespace SchoolManagementSystem.Services
                 existingStudent.UserID = studentDto.UserID;
 
                 _studentRepository.Update(existingStudent);
-                await _studentRepository.SaveAsync();
+                await _unitOfWork.SaveAsync();
 
                 return await _studentRepository.GetAllAsync();
             }
@@ -103,7 +103,7 @@ namespace SchoolManagementSystem.Services
                     throw new KeyNotFoundException($"Student with ID {id} was not found.");
 
                 _studentRepository.Delete(student);
-                await _studentRepository.SaveAsync();
+                await _unitOfWork.SaveAsync();
                 return await _studentRepository.GetAllAsync();
             }
             catch (Exception)

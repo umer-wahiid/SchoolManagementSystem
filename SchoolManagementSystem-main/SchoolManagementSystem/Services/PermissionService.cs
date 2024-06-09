@@ -55,7 +55,7 @@ namespace SchoolManagementSystem.Services
                 permission.View = permissionDto.View;
 
                 await _permissionRepository.InsertAsync(permission);
-                await _permissionRepository.SaveAsync();
+                await _unitOfWork.SaveAsync();
                 return await _permissionRepository.GetAllAsync();
             }
             catch (Exception)
@@ -80,7 +80,7 @@ namespace SchoolManagementSystem.Services
                 existingPermission.View = permissionDto.View;
 
                 _permissionRepository.Update(existingPermission);
-                await _permissionRepository.SaveAsync();
+                await _unitOfWork.SaveAsync();
 
                 return await _permissionRepository.GetAllAsync();
             }
@@ -99,7 +99,7 @@ namespace SchoolManagementSystem.Services
                     throw new KeyNotFoundException($"Permission with ID {id} was not found.");
 
                 _permissionRepository.Delete(permission);
-                await _permissionRepository.SaveAsync();
+                await _unitOfWork.SaveAsync();
                 return await _permissionRepository.GetAllAsync();
             }
             catch (Exception)
