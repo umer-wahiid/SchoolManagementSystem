@@ -1,47 +1,42 @@
-using SchoolManagementSystem.Domain.Enums;
+﻿using SchoolManagementSystem.Domain.Enums;
 using System.ComponentModel.DataAnnotations;
 
-namespace SchoolManagementSystem.Domain.Entitites
+namespace SchoolManagementSystem.DTOs
 {
-
-    public class Teacher : BaseEntity
-    {
-        public int TeacherID { get; set; }
+    public record TeacherDTO
+    (
+        int TeacherID,
 
         [Required(ErrorMessage = "First name is required.")]
         [StringLength(50, ErrorMessage = "First name must be between 1 and 50 characters.", MinimumLength = 1)]
-        public string FirstName { get; set; }
+        string FirstName,
 
         [Required(ErrorMessage = "Last name is required.")]
         [StringLength(50, ErrorMessage = "Last name must be between 1 and 50 characters.", MinimumLength = 1)]
-        public string LastName { get; set; }
+        string LastName,
 
         [Required(ErrorMessage = "Date of birth is required.")]
         [DataType(DataType.Date)]
-        public DateTime DateOfBirth { get; set; }
+        DateTime DateOfBirth,
 
         [Required(ErrorMessage = "Gender is required.")]
-        public Gender Gender { get; set; }
+        Gender Gender,
 
         [Required(ErrorMessage = "Address is required.")]
         [StringLength(100, ErrorMessage = "Address must be between 1 and 100 characters.", MinimumLength = 1)]
-        public string Address { get; set; }
+        string Address,
 
         [Required(ErrorMessage = "Phone number is required.")]
         [Phone(ErrorMessage = "Invalid phone number format.")]
-        public string PhoneNumber { get; set; }
+        string PhoneNumber,
 
-        [Required(ErrorMessage = "Hire date is required.")]
+        [Required(ErrorMessage = "Enrollment date is required.")]
         [DataType(DataType.Date)]
-        public DateTime HireDate { get; set; }
-
+        DateTime HireDate,
         [Required(ErrorMessage = "Specialization is required.")]
-        public string Specialization { get; set; }
+        [StringLength(30, ErrorMessage = "Specialization must be between 1 and 100 characters.", MinimumLength = 1)]
+        string Specialization,
 
-        public int UserID { get; set; }
-
-        public User User { get; set; }
-
-    }
-
+        int UserID
+    );
 }
