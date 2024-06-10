@@ -7,7 +7,7 @@ namespace SchoolManagementSystem.Domain.Entitites
     {
         public int AttendanceID { get; set; }
 
-        public int StudentID { get; set; }
+        public int UserID { get; set; }
 
         [Required(ErrorMessage = "Date is required.")]
         [DataType(DataType.Date)]
@@ -16,6 +16,6 @@ namespace SchoolManagementSystem.Domain.Entitites
         [Required(ErrorMessage = "Status is required.")]
         public AttendanceStatus Status { get; set; }
 
-        public Student Student { get; set; }
+        public User User { get; set; }
     }
 }

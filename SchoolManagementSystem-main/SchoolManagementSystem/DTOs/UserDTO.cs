@@ -3,15 +3,15 @@
 namespace SchoolManagementSystem.DTOs
 {
     public record UserDTO
-    {
-        public int UserID { get; set; }
+    (
+        int UserID,
 
-        public string Username { get; set; }
+        string Username,
 
-        public string Password { get; set; }
+        string Password,
 
-        public string Email { get; set; }
+        string Email,
 
-        public int RoleID { get; set; }
-    }
+        int RoleID
+    );
 }

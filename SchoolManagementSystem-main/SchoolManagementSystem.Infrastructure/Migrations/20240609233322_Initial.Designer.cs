@@ -12,8 +12,8 @@ using SchoolManagementSystem.Infrastructure.DBContext;
 namespace SchoolManagementSystem.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20240607082353_initial")]
-    partial class initial
+    [Migration("20240609233322_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -51,17 +51,17 @@ namespace SchoolManagementSystem.Infrastructure.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.Property<int>("StudentID")
+                    b.Property<int?>("StudentID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("TeacherID")
+                    b.Property<int>("UserID")
                         .HasColumnType("int");
 
                     b.HasKey("AttendanceID");
 
                     b.HasIndex("StudentID");
 
-                    b.HasIndex("TeacherID");
+                    b.HasIndex("UserID");
 
                     b.ToTable("Attendances");
                 });
@@ -411,14 +411,9 @@ namespace SchoolManagementSystem.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("TeacherID")
-                        .HasColumnType("int");
-
                     b.HasKey("SubjectID");
 
                     b.HasIndex("ClassID");
-
-                    b.HasIndex("TeacherID");
 
                     b.ToTable("Subjects");
                 });
@@ -488,9 +483,8 @@ namespace SchoolManagementSystem.Infrastructure.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("Gender")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Gender")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("HireDate")
                         .HasColumnType("datetime2");
@@ -571,18 +565,18 @@ namespace SchoolManagementSystem.Infrastructure.Migrations
 
             modelBuilder.Entity("SchoolManagementSystem.Domain.Entitites.Attendance", b =>
                 {
-                    b.HasOne("SchoolManagementSystem.Domain.Entitites.Student", "Student")
+                    b.HasOne("SchoolManagementSystem.Domain.Entitites.Student", null)
                         .WithMany("Attendances")
                         .HasForeignKey("StudentID")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("SchoolManagementSystem.Domain.Entitites.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("SchoolManagementSystem.Domain.Entitites.Teacher", null)
-                        .WithMany("Attendances")
-                        .HasForeignKey("TeacherID")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.Navigation("Student");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("SchoolManagementSystem.Domain.Entitites.Enrollment", b =>
@@ -670,11 +664,6 @@ namespace SchoolManagementSystem.Infrastructure.Migrations
                         .WithMany("Subject")
                         .HasForeignKey("ClassID")
                         .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("SchoolManagementSystem.Domain.Entitites.Teacher", null)
-                        .WithMany("Courses")
-                        .HasForeignKey("TeacherID")
-                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("SchoolManagementSystem.Domain.Entitites.SubjectResult", b =>
@@ -733,13 +722,6 @@ namespace SchoolManagementSystem.Infrastructure.Migrations
                     b.Navigation("Attendances");
 
                     b.Navigation("Enrollments");
-                });
-
-            modelBuilder.Entity("SchoolManagementSystem.Domain.Entitites.Teacher", b =>
-                {
-                    b.Navigation("Attendances");
-
-                    b.Navigation("Courses");
                 });
 #pragma warning restore 612, 618
         }

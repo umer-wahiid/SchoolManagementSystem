@@ -176,5 +176,15 @@ namespace SchoolManagementSystem.Infrastructure
             list = query.Where(predicate).ToList<T>();
             return list;
         }
+
+        public async Task<List<T>> GetAll(params string[] navigationProperties)
+        {
+            List<T> list;
+            var query = DbSet.AsNoTracking().AsQueryable();
+            foreach (string navigationProperty in navigationProperties)
+                query = query.Include(navigationProperty);
+            list = query.ToList<T>();
+            return list;
+        }
     }
 }
