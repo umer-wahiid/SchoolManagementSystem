@@ -38,6 +38,7 @@ builder.Services.AddScoped<IPermissionService, PermissionService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IJwtAuthorization, JwtAuthorization>();
 builder.Services.AddScoped<ITeacherService, TeacherService>();
+builder.Services.AddScoped<ISubjectService, SubjectService>();
 
 
 var app = builder.Build();
