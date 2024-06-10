@@ -21,7 +21,7 @@ namespace SchoolManagementSystem.Services
         {
             try
             {
-                return await _permissionRepository.GetAllAsync();
+                return await _permissionRepository.GetAll(["Page","Role"]);
             }
             catch (Exception)
             {
@@ -56,7 +56,7 @@ namespace SchoolManagementSystem.Services
 
                 await _permissionRepository.InsertAsync(permission);
                 await _unitOfWork.SaveAsync();
-                return await _permissionRepository.GetAllAsync();
+                return await GetAll();
             }
             catch (Exception)
             {
@@ -82,7 +82,7 @@ namespace SchoolManagementSystem.Services
                 _permissionRepository.Update(existingPermission);
                 await _unitOfWork.SaveAsync();
 
-                return await _permissionRepository.GetAllAsync();
+                return await GetAll();
             }
             catch (Exception)
             {
@@ -100,7 +100,7 @@ namespace SchoolManagementSystem.Services
 
                 _permissionRepository.Delete(permission);
                 await _unitOfWork.SaveAsync();
-                return await _permissionRepository.GetAllAsync();
+                return await GetAll();
             }
             catch (Exception)
             {

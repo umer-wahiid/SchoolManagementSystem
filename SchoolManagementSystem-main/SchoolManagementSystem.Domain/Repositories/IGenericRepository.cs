@@ -24,5 +24,6 @@ namespace SchoolManagementSystem.Domain.Repositories
         T FirstOrDefault(Expression<Func<T, bool>> predicate);
         T First(Expression<Func<T, bool>> predicate);
         bool Any(Expression<Func<T, bool>> predicate);
+        Task<List<T>> GetAll(params string[] navigationProperties);
     }
 }

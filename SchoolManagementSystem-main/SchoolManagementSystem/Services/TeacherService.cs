@@ -22,7 +22,7 @@ namespace SchoolManagementSystem.Services
         {
             try
             {
-                return await _teacherRepository.GetAllAsync();
+                return await _teacherRepository.GetAll(["User"]);
             }
             catch (Exception)
             {
@@ -60,7 +60,7 @@ namespace SchoolManagementSystem.Services
 
                 await _teacherRepository.InsertAsync(Teacher);
                 await _unitOfWork.SaveAsync();
-                return await _teacherRepository.GetAllAsync();
+                return await GetAll();
             }
             catch (Exception)
             {
@@ -89,13 +89,14 @@ namespace SchoolManagementSystem.Services
                 _teacherRepository.Update(existingTeacher);
                 await _unitOfWork.SaveAsync();
 
-                return await _teacherRepository.GetAllAsync();
+                return await GetAll();
             }
             catch (Exception)
             {
                 throw;
             }
         }
+        
         public async Task<IEnumerable<Teacher>> Delete(int id)
         {
             try
@@ -106,7 +107,7 @@ namespace SchoolManagementSystem.Services
 
                 _teacherRepository.Delete(teacher);
                 await _unitOfWork.SaveAsync();
-                return await _teacherRepository.GetAllAsync();
+                return await GetAll();
             }
             catch (Exception)
             {
